@@ -3,6 +3,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+/src/main/resources/seed-urls.conf
+
 ### IntelliJ IDEA ###
 .idea/
 .idea/modules.xml
