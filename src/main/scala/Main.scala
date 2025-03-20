@@ -6,7 +6,7 @@ import scala.jdk.CollectionConverters.*
 
 @main def startCrawler(): Unit = {
   val actorSystem = ActorSystem(Crawler(), "crawler")
-  
+
   val seedUrls = ConfigFactory.load("seed-urls")
     .getStringList("seed-urls")
     .asScala
