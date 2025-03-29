@@ -9,13 +9,11 @@ lazy val dev = Project("abwcf-dev", file("."))
 
 lazy val abwcf = project in file("Actor-Based Web Crawling Framework")
 
-val pekkoPersistenceJdbcVersion = "1.1.0" //License: Apache-2.0
 val postgresVersion = "42.7.5" //License: BSD-2-Clause
 val logbackVersion = "1.5.18" //License: EPL / LGPL (dual license)
 
 libraryDependencies ++= Seq(
   //These dependencies should not be included in ABWCF release packages:
-  "org.apache.pekko" %% "pekko-persistence-jdbc" % pekkoPersistenceJdbcVersion, //The persistence plugin must support event sourcing.
   "org.postgresql" % "postgresql" % postgresVersion,
   "ch.qos.logback" % "logback-classic" % logbackVersion % Runtime
 )

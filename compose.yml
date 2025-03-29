@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    volumes:
+      - ./scripts/abwcf-schema-postgres.sql:/docker-entrypoint-initdb.d/abwcf-schema-postgres.sql:ro
+#      - ./data/postgres:/var/lib/postgresql/data
+    shm_size: 256mb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: changeme
