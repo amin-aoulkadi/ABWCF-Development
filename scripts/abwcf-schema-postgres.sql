@@ -2,7 +2,7 @@ CREATE TABLE pages (
   url            TEXT,
   status         TEXT,
   crawl_depth    INTEGER,
-  crawl_priority INTEGER
+  crawl_priority BIGINT
 );
 
 -- Indexes to speed up common ABWCF queries:
