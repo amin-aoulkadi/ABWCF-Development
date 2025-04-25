@@ -7,6 +7,7 @@ CREATE TABLE pages (
 
 CREATE TABLE hosts (
   scheme_and_authority TEXT,
+  rule_mode            TEXT,
   robot_rules          TEXT,
   crawl_delay          BIGINT,
   valid_until          TIMESTAMP WITH TIME ZONE
