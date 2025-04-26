@@ -21,6 +21,9 @@ import scala.jdk.CollectionConverters.*
 
     override def onFetchError(page: Page, statusCode: StatusCode, context: ActorContext[_]): Unit =
       context.log.info("Processing error from {} ({})", page.url, statusCode)
+
+    override def onLengthLimitExceeded(page: Page, response: FetchResponse, context: ActorContext[_]): Unit =
+      context.log.info("{} ({}) was not fetched because it exceeds the maximum accepted content length", page.url, response.status)
   }
 
   val settings = CrawlerSettings(userCode)
