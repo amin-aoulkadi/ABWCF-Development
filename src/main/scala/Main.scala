@@ -2,6 +2,7 @@ import abwcf.actors.Crawler
 import abwcf.data.{FetchResponse, Page, PageCandidate}
 import abwcf.util.{CrawlerSettings, PrioritizationFunctions, UserCode}
 import com.typesafe.config.ConfigFactory
+import io.opentelemetry.api.GlobalOpenTelemetry
 import org.apache.pekko.actor.typed.ActorSystem
 import org.apache.pekko.actor.typed.scaladsl.ActorContext
 import org.apache.pekko.http.scaladsl.model.StatusCode
@@ -26,7 +27,8 @@ import scala.jdk.CollectionConverters.*
       context.log.info("{} ({}) was not fetched because it exceeds the maximum accepted content length", page.url, response.status)
   }
 
-  val settings = CrawlerSettings(userCode)
+  val openTelemetry = GlobalOpenTelemetry.get()
+  val settings = CrawlerSettings(userCode, openTelemetry)
   val actorSystem = ActorSystem(Crawler(settings), "crawler")
 
   val seedUrls = ConfigFactory.load("seed-urls")
