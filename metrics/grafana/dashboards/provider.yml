@@ -1,0 +1,18 @@
+#
+# Grafana dashboard provider configuration.
+#
+# References:
+#   https://grafana.com/docs/grafana/latest/administration/provisioning/
+#
+
+apiVersion: 1
+
+providers:
+  - name: Mounted Volume
+    type: file
+    disableDeletion: true
+    updateIntervalSeconds: 60
+    allowUiUpdates: false
+    options:
+      path: /etc/grafana/provisioning/dashboards/json # Mount the folder with the dashboard files to this path in the container.
+      foldersFromFilesStructure: true

@@ -1,0 +1,25 @@
+#
+# Grafana data source configuration.
+#
+# References:
+#   https://grafana.com/docs/grafana/latest/administration/provisioning/
+#   https://grafana.com/docs/grafana/latest/datasources/prometheus/
+#
+
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    jsonData:
+      httpMethod: POST
+      manageAlerts: true
+      prometheusType: Prometheus
+      prometheusVersion: 3.3.0
+      cacheLevel: High
+      incrementalQuerying: true
+      incrementalQueryOverlapWindow: 10m
+      disableRecordingRules: false
+    editable: true
