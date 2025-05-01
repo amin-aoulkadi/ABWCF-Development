@@ -1,4 +1,15 @@
 services:
+  crawler:
+    image: crawler-dev
+    build: .
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    volumes:
+      - ./metrics/java-agent.properties:/opentelemetry/java-agent.properties:ro
+    environment:
+      DATABASE_HOST: postgres
+
   postgres:
     image: postgres:17-alpine
     restart: unless-stopped
