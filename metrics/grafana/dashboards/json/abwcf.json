@@ -1041,12 +1041,227 @@
       "type": "timeseries"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
         "y": 27
+      },
+      "id": 32,
+      "panels": [],
+      "title": "Robots Fetcher Manager",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 28
+      },
+      "id": 33,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "median"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "{\"abwcf.robots_fetcher_manager.robots_fetchers\", instance=~\"$instance\"}",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "{{actor_system.address}}{{actor.path}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Number of Robots Fetchers",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 28
+      },
+      "id": 34,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "median"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "{\"abwcf.robots_fetcher_manager.queue.length\", instance=~\"$instance\"}",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "{{actor_system.address}}{{actor.path}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Fetch Queue Length",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 36
       },
       "id": 12,
       "panels": [
@@ -1114,7 +1329,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 28
+            "y": 37
           },
           "id": 13,
           "options": {
@@ -1127,7 +1342,7 @@
             "tooltip": {
               "hideZeros": false,
               "mode": "multi",
-              "sort": "none"
+              "sort": "desc"
             }
           },
           "pluginVersion": "11.6.1",
@@ -1172,7 +1387,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 28
+            "y": 37
           },
           "id": 15,
           "options": {
@@ -1283,7 +1498,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 36
+            "y": 45
           },
           "id": 14,
           "options": {
@@ -1296,7 +1511,7 @@
             "tooltip": {
               "hideZeros": false,
               "mode": "multi",
-              "sort": "none"
+              "sort": "desc"
             }
           },
           "pluginVersion": "11.6.1",
@@ -1342,7 +1557,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 36
+            "y": 45
           },
           "id": 16,
           "options": {
@@ -1452,7 +1667,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 44
+            "y": 53
           },
           "id": 24,
           "options": {
@@ -1510,7 +1725,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 44
+            "y": 53
           },
           "id": 26,
           "options": {
@@ -1618,7 +1833,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 52
+            "y": 61
           },
           "id": 25,
           "options": {
@@ -1676,7 +1891,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 52
+            "y": 61
           },
           "id": 27,
           "options": {
@@ -1783,7 +1998,7 @@
             "h": 8,
             "w": 18,
             "x": 0,
-            "y": 60
+            "y": 69
           },
           "id": 28,
           "options": {
@@ -1830,7 +2045,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 37
       },
       "id": 6,
       "panels": [
@@ -1897,7 +2112,7 @@
             "h": 8,
             "w": 18,
             "x": 0,
-            "y": 244
+            "y": 78
           },
           "id": 7,
           "options": {
@@ -1963,7 +2178,7 @@
             "h": 16,
             "w": 6,
             "x": 18,
-            "y": 244
+            "y": 78
           },
           "id": 11,
           "options": {
@@ -2069,7 +2284,7 @@
             "h": 8,
             "w": 18,
             "x": 0,
-            "y": 252
+            "y": 86
           },
           "id": 8,
           "options": {
