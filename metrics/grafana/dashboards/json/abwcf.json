@@ -1282,9 +1282,9 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
-                "barWidthFactor": 0.6,
-                "drawStyle": "line",
-                "fillOpacity": 0,
+                "barWidthFactor": 0.75,
+                "drawStyle": "bars",
+                "fillOpacity": 100,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
@@ -1293,7 +1293,7 @@
                 },
                 "insertNulls": false,
                 "lineInterpolation": "linear",
-                "lineWidth": 1,
+                "lineWidth": 0,
                 "pointSize": 5,
                 "scaleDistribution": {
                   "type": "linear"
@@ -1302,7 +1302,7 @@
                 "spanNulls": false,
                 "stacking": {
                   "group": "A",
-                  "mode": "none"
+                  "mode": "normal"
                 },
                 "thresholdsStyle": {
                   "mode": "off"
@@ -1342,7 +1342,7 @@
             "tooltip": {
               "hideZeros": false,
               "mode": "multi",
-              "sort": "desc"
+              "sort": "none"
             }
           },
           "pluginVersion": "11.6.1",
@@ -1350,7 +1350,7 @@
             {
               "disableTextWrap": false,
               "editorMode": "builder",
-              "expr": "rate({\"abwcf.fetcher.fetched_pages_total\", instance=~\"$instance\"}[$__rate_interval])",
+              "expr": "rate({\"abwcf.fetcher.fetched_pages_total\", instance=~\"$instance\"}[$__rate_interval]) > 0",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "legendFormat": "{{actor_system.address}}{{actor.path}}",
@@ -1360,6 +1360,103 @@
             }
           ],
           "title": "Fetched Pages (Per-Second Average Rate)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.75,
+                "drawStyle": "bars",
+                "fillOpacity": 100,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 0,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "Bps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 37
+          },
+          "id": 14,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.6.1",
+          "targets": [
+            {
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "expr": "rate({\"abwcf.fetcher.received_bytes_bytes_total\", instance=~\"$instance\"}[$__rate_interval]) > 0",
+              "fullMetaSearch": true,
+              "includeNullMetadata": true,
+              "legendFormat": "{{actor_system.address}}{{actor.path}}",
+              "range": true,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Received Response Body Bytes (Per-Second Average Rate)",
           "type": "timeseries"
         },
         {
@@ -1386,8 +1483,8 @@
           "gridPos": {
             "h": 8,
             "w": 12,
-            "x": 12,
-            "y": 37
+            "x": 0,
+            "y": 45
           },
           "id": 15,
           "options": {
@@ -1433,103 +1530,6 @@
           ],
           "title": "Fetched Pages (Total)",
           "type": "piechart"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "barWidthFactor": 0.6,
-                "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "Bps"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 45
-          },
-          "id": 14,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": false
-            },
-            "tooltip": {
-              "hideZeros": false,
-              "mode": "multi",
-              "sort": "desc"
-            }
-          },
-          "pluginVersion": "11.6.1",
-          "targets": [
-            {
-              "disableTextWrap": false,
-              "editorMode": "builder",
-              "expr": "rate({\"abwcf.fetcher.received_bytes_bytes_total\", instance=~\"$instance\"}[$__rate_interval])",
-              "fullMetaSearch": true,
-              "includeNullMetadata": true,
-              "legendFormat": "{{actor_system.address}}{{actor.path}}",
-              "range": true,
-              "refId": "A",
-              "useBackend": false
-            }
-          ],
-          "title": "Received Response Body Bytes (Per-Second Average Rate)",
-          "type": "timeseries"
         },
         {
           "datasource": {
@@ -1688,7 +1688,7 @@
             {
               "disableTextWrap": false,
               "editorMode": "builder",
-              "expr": "sum by(\"http.response.status_code\") (increase({\"abwcf.fetcher.received_responses_total\", instance=~\"$instance\"}[$__rate_interval]))",
+              "expr": "(sum by(\"http.response.status_code\") (increase({\"abwcf.fetcher.received_responses_total\", instance=~\"$instance\"}[$__rate_interval]))) > 0",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "legendFormat": "__auto",
@@ -1699,76 +1699,6 @@
           ],
           "title": "Responses by Status Code",
           "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                }
-              },
-              "mappings": []
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 53
-          },
-          "id": 26,
-          "options": {
-            "displayLabels": [],
-            "legend": {
-              "displayMode": "table",
-              "placement": "right",
-              "showLegend": true,
-              "values": [
-                "percent",
-                "value"
-              ]
-            },
-            "pieType": "donut",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "tooltip": {
-              "hideZeros": false,
-              "mode": "multi",
-              "sort": "none"
-            }
-          },
-          "pluginVersion": "11.6.1",
-          "targets": [
-            {
-              "disableTextWrap": false,
-              "editorMode": "builder",
-              "expr": "sum by(\"http.response.status_code\") ({\"abwcf.fetcher.received_responses_total\", instance=~\"$instance\"})",
-              "fullMetaSearch": false,
-              "includeNullMetadata": true,
-              "legendFormat": "__auto",
-              "range": true,
-              "refId": "A",
-              "useBackend": false
-            }
-          ],
-          "title": "Responses by Status Code (Total)",
-          "type": "piechart"
         },
         {
           "datasource": {
@@ -1832,8 +1762,8 @@
           "gridPos": {
             "h": 8,
             "w": 12,
-            "x": 0,
-            "y": 61
+            "x": 12,
+            "y": 53
           },
           "id": 25,
           "options": {
@@ -1853,8 +1783,8 @@
           "targets": [
             {
               "disableTextWrap": false,
-              "editorMode": "builder",
-              "expr": "label_replace(sum by(\"http.response.header.content-type\") (increase({\"abwcf.fetcher.received_responses_total\", instance=~\"$instance\"}[$__rate_interval])), \"http.response.header.content-type\", \"$1\", \"http.response.header.content-type\", \"\\\\[\\\"(.+)\\\"\\\\]\")",
+              "editorMode": "code",
+              "expr": "label_replace(sum by(\"http.response.header.content-type\") (increase({\"abwcf.fetcher.received_responses_total\", instance=~\"$instance\"}[$__rate_interval])) > 0, \"http.response.header.content-type\", \"$1\", \"http.response.header.content-type\", \"\\\\[\\\"(.+)\\\"\\\\]\")",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "legendFormat": "__auto",
@@ -1865,6 +1795,76 @@
           ],
           "title": "Responses by Content Type",
           "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "mappings": []
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 61
+          },
+          "id": 26,
+          "options": {
+            "displayLabels": [],
+            "legend": {
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "values": [
+                "percent",
+                "value"
+              ]
+            },
+            "pieType": "donut",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.6.1",
+          "targets": [
+            {
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "expr": "sum by(\"http.response.status_code\") ({\"abwcf.fetcher.received_responses_total\", instance=~\"$instance\"})",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Responses by Status Code (Total)",
+          "type": "piechart"
         },
         {
           "datasource": {
@@ -1922,7 +1922,7 @@
           "targets": [
             {
               "disableTextWrap": false,
-              "editorMode": "builder",
+              "editorMode": "code",
               "expr": "label_replace(sum by(\"http.response.header.content-type\") ({\"abwcf.fetcher.received_responses_total\", instance=~\"$instance\"}), \"http.response.header.content-type\", \"$1\", \"http.response.header.content-type\", \"\\\\[\\\"(.+)\\\"\\\\]\")",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
@@ -1952,9 +1952,9 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
-                "barWidthFactor": 0.6,
-                "drawStyle": "line",
-                "fillOpacity": 0,
+                "barWidthFactor": 0.75,
+                "drawStyle": "bars",
+                "fillOpacity": 100,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
@@ -1963,7 +1963,7 @@
                 },
                 "insertNulls": false,
                 "lineInterpolation": "linear",
-                "lineWidth": 1,
+                "lineWidth": 0,
                 "pointSize": 5,
                 "scaleDistribution": {
                   "type": "linear"
@@ -1972,7 +1972,7 @@
                 "spanNulls": false,
                 "stacking": {
                   "group": "A",
-                  "mode": "none"
+                  "mode": "normal"
                 },
                 "thresholdsStyle": {
                   "mode": "off"
@@ -2023,7 +2023,7 @@
               },
               "disableTextWrap": false,
               "editorMode": "builder",
-              "expr": "increase({\"abwcf.fetcher.exceptions\", instance=~\"$instance\"}[$__rate_interval])",
+              "expr": "sum by(exception) (increase({\"abwcf.fetcher.exceptions_total\", instance=~\"$instance\"}[$__rate_interval])) > 0",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "legendFormat": "{{exception}}",
@@ -2326,7 +2326,7 @@
             "h": 8,
             "w": 18,
             "x": 0,
-            "y": 191
+            "y": 87
           },
           "id": 7,
           "options": {
@@ -2392,7 +2392,7 @@
             "h": 16,
             "w": 6,
             "x": 18,
-            "y": 191
+            "y": 87
           },
           "id": 11,
           "options": {
@@ -2452,9 +2452,9 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
-                "barWidthFactor": 0.6,
-                "drawStyle": "line",
-                "fillOpacity": 0,
+                "barWidthFactor": 0.75,
+                "drawStyle": "bars",
+                "fillOpacity": 100,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
@@ -2463,7 +2463,7 @@
                 },
                 "insertNulls": false,
                 "lineInterpolation": "linear",
-                "lineWidth": 1,
+                "lineWidth": 0,
                 "pointSize": 5,
                 "scaleDistribution": {
                   "type": "linear"
@@ -2472,7 +2472,7 @@
                 "spanNulls": false,
                 "stacking": {
                   "group": "A",
-                  "mode": "none"
+                  "mode": "normal"
                 },
                 "thresholdsStyle": {
                   "mode": "off"
@@ -2498,7 +2498,7 @@
             "h": 8,
             "w": 18,
             "x": 0,
-            "y": 199
+            "y": 95
           },
           "id": 8,
           "options": {
@@ -2523,7 +2523,7 @@
               },
               "disableTextWrap": false,
               "editorMode": "builder",
-              "expr": "increase({\"abwcf.url_normalizer.exceptions_total\", instance=~\"$instance\"}[$__rate_interval])",
+              "expr": "sum by(exception) (increase({\"abwcf.url_normalizer.exceptions_total\", instance=~\"$instance\"}[$__rate_interval])) > 0",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "legendFormat": "{{exception}}",
@@ -2614,7 +2614,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 40
+            "y": 104
           },
           "id": 42,
           "options": {
@@ -2714,7 +2714,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 40
+            "y": 104
           },
           "id": 44,
           "options": {
@@ -2766,9 +2766,9 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
-                "barWidthFactor": 0.6,
-                "drawStyle": "line",
-                "fillOpacity": 0,
+                "barWidthFactor": 0.75,
+                "drawStyle": "bars",
+                "fillOpacity": 100,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
@@ -2777,7 +2777,7 @@
                 },
                 "insertNulls": false,
                 "lineInterpolation": "linear",
-                "lineWidth": 1,
+                "lineWidth": 0,
                 "pointSize": 5,
                 "scaleDistribution": {
                   "type": "linear"
@@ -2786,7 +2786,7 @@
                 "spanNulls": false,
                 "stacking": {
                   "group": "A",
-                  "mode": "none"
+                  "mode": "normal"
                 },
                 "thresholdsStyle": {
                   "mode": "off"
@@ -2812,7 +2812,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 48
+            "y": 112
           },
           "id": 45,
           "options": {
@@ -2940,7 +2940,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 57
+            "y": 121
           },
           "id": 46,
           "options": {
@@ -3040,7 +3040,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 57
+            "y": 121
           },
           "id": 47,
           "options": {
@@ -3092,9 +3092,9 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
-                "barWidthFactor": 0.6,
-                "drawStyle": "line",
-                "fillOpacity": 0,
+                "barWidthFactor": 0.75,
+                "drawStyle": "bars",
+                "fillOpacity": 100,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
@@ -3103,7 +3103,7 @@
                 },
                 "insertNulls": false,
                 "lineInterpolation": "linear",
-                "lineWidth": 1,
+                "lineWidth": 0,
                 "pointSize": 5,
                 "scaleDistribution": {
                   "type": "linear"
@@ -3112,7 +3112,7 @@
                 "spanNulls": false,
                 "stacking": {
                   "group": "A",
-                  "mode": "none"
+                  "mode": "normal"
                 },
                 "thresholdsStyle": {
                   "mode": "off"
@@ -3138,7 +3138,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 65
+            "y": 129
           },
           "id": 49,
           "options": {
