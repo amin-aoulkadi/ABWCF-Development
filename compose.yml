@@ -1,7 +1,10 @@
 services:
   crawler:
     image: crawler-dev
-    build: .
+    build:
+      context: .
+      args:
+        OTEL_JAVA_AGENT_VERSION: v2.16.0
     restart: unless-stopped
     depends_on:
       - postgres

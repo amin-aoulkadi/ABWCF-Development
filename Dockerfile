@@ -21,8 +21,10 @@ RUN sbt assembly
 
 FROM eclipse-temurin:23-jre-alpine
 
+ARG OTEL_JAVA_AGENT_VERSION
+
 # Download the OpenTelemetry Java agent:
-ADD --chown=sbtuser https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v2.15.0/opentelemetry-javaagent.jar /opentelemetry/opentelemetry-javaagent.jar
+ADD --chown=sbtuser https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/${OTEL_JAVA_AGENT_VERSION}/opentelemetry-javaagent.jar /opentelemetry/opentelemetry-javaagent.jar
 
 # Copy the build artifacts:
 COPY --from=build /app/target/scala-3.3.4/abwcf-dev.jar /app/abwcf-dev.jar
