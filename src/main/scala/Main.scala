@@ -1,6 +1,6 @@
 import abwcf.actors.Crawler
+import abwcf.api.{CrawlerSettings, PrioritizationFunctions, UserCode}
 import abwcf.data.{FetchResponse, Page, PageCandidate}
-import abwcf.util.{CrawlerSettings, PrioritizationFunctions, UserCode}
 import com.typesafe.config.ConfigFactory
 import io.opentelemetry.api.GlobalOpenTelemetry
 import org.apache.pekko.actor.typed.ActorSystem
