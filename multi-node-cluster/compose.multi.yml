@@ -1,0 +1,34 @@
+#
+# Extends and merges with the compose.yml file from the parent directory to create a cluster with two ABWCF nodes.
+#
+
+services:
+  crawler: !reset null # Disable this service.
+
+  node-1:
+    extends:
+      file: ./compose.yml
+      service: crawler
+    volumes:
+      - ./multi-node-cluster/node-1.conf:/node-1.conf:ro
+    entrypoint: # Override the entrypoint to add the node-1.conf file.
+      - java
+      - "-javaagent:/opentelemetry/opentelemetry-javaagent.jar"
+      - "-Dotel.javaagent.configuration-file=/opentelemetry/java-agent.properties"
+      - "-Dconfig.file=/node-1.conf"
+      - "-jar"
+      - abwcf-dev.jar
+
+  node-2:
+    extends:
+      file: ./compose.yml
+      service: crawler
+    volumes:
+      - ./multi-node-cluster/node-2.conf:/node-2.conf:ro
+    entrypoint: # Override the entrypoint to add the node-2.conf file.
+      - java
+      - "-javaagent:/opentelemetry/opentelemetry-javaagent.jar"
+      - "-Dotel.javaagent.configuration-file=/opentelemetry/java-agent.properties"
+      - "-Dconfig.file=/node-2.conf"
+      - "-jar"
+      - abwcf-dev.jar
