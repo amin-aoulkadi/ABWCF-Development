@@ -65,7 +65,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Received Response Body Bytes"
+              "options": "Received Response Body Bytes (Pages)"
             },
             "properties": [
               {
@@ -128,7 +128,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "sum by(instance) ({\"abwcf.fetcher.fetched_pages_total\"})",
+          "expr": "sum by(instance) ({\"abwcf.fetcher.requests_total\"})",
           "format": "table",
           "fullMetaSearch": false,
           "hide": false,
@@ -193,8 +193,8 @@
             },
             "renameByName": {
               "Value #A": "Uptime",
-              "Value #B": "Fetched Pages",
-              "Value #C": "Received Response Body Bytes",
+              "Value #B": "Requested Pages",
+              "Value #C": "Received Response Body Bytes (Pages)",
               "actor_system.address": "Actor System Address",
               "instance 1": "Instance"
             }
@@ -270,7 +270,7 @@
               {
                 "matcher": {
                   "id": "byName",
-                  "options": "Received Response Body Bytes"
+                  "options": "Received Response Body Bytes (Pages)"
                 },
                 "properties": [
                   {
@@ -494,7 +494,7 @@
                   "Value #B": "Fetched Pages",
                   "Value #B (lastNotNull)": "Fetched Pages",
                   "Value #C": "Received Response Body Bytes",
-                  "Value #C (lastNotNull)": "Received Response Body Bytes",
+                  "Value #C (lastNotNull)": "Received Response Body Bytes (Pages)",
                   "actor_system.address": "Actor System Address",
                   "actor_system.address (lastNotNull)": "Actor System Address",
                   "instance": "Instance",
@@ -1350,16 +1350,16 @@
             {
               "disableTextWrap": false,
               "editorMode": "builder",
-              "expr": "rate({\"abwcf.fetcher.fetched_pages_total\", instance=~\"$instance\"}[$__rate_interval]) > 0",
+              "expr": "rate({\"abwcf.fetcher.requests_total\", instance=~\"$instance\"}[$__rate_interval])",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
-              "legendFormat": "{{actor_system.address}}{{actor.path}}",
+              "legendFormat": "{{actor_system.address}}",
               "range": true,
               "refId": "A",
               "useBackend": false
             }
           ],
-          "title": "Fetched Pages (Per-Second Average Rate)",
+          "title": "Requested Pages (Per-Second Average Rate)",
           "type": "timeseries"
         },
         {
@@ -1447,10 +1447,10 @@
             {
               "disableTextWrap": false,
               "editorMode": "builder",
-              "expr": "rate({\"abwcf.fetcher.received_bytes_bytes_total\", instance=~\"$instance\"}[$__rate_interval]) > 0",
+              "expr": "rate({\"abwcf.fetcher.received_bytes_bytes_total\", instance=~\"$instance\"}[$__rate_interval])",
               "fullMetaSearch": true,
               "includeNullMetadata": true,
-              "legendFormat": "{{actor_system.address}}{{actor.path}}",
+              "legendFormat": "{{actor_system.address}}",
               "range": true,
               "refId": "A",
               "useBackend": false
@@ -1458,151 +1458,6 @@
           ],
           "title": "Received Response Body Bytes (Per-Second Average Rate)",
           "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                }
-              },
-              "mappings": []
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 125
-          },
-          "id": 15,
-          "options": {
-            "displayLabels": [],
-            "legend": {
-              "displayMode": "table",
-              "placement": "right",
-              "showLegend": true,
-              "values": [
-                "percent",
-                "value"
-              ]
-            },
-            "pieType": "donut",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "tooltip": {
-              "hideZeros": false,
-              "mode": "multi",
-              "sort": "none"
-            }
-          },
-          "pluginVersion": "11.6.1",
-          "targets": [
-            {
-              "disableTextWrap": false,
-              "editorMode": "builder",
-              "exemplar": false,
-              "expr": "{\"abwcf.fetcher.fetched_pages_total\", instance=~\"$instance\"}",
-              "fullMetaSearch": false,
-              "includeNullMetadata": true,
-              "instant": false,
-              "legendFormat": "{{actor_system.address}}{{actor.path}}",
-              "range": true,
-              "refId": "A",
-              "useBackend": false
-            }
-          ],
-          "title": "Fetched Pages (Total)",
-          "type": "piechart"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                }
-              },
-              "mappings": [],
-              "unit": "decbytes"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 125
-          },
-          "id": 16,
-          "options": {
-            "displayLabels": [],
-            "legend": {
-              "displayMode": "table",
-              "placement": "right",
-              "showLegend": true,
-              "values": [
-                "percent",
-                "value"
-              ]
-            },
-            "pieType": "donut",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "tooltip": {
-              "hideZeros": false,
-              "mode": "multi",
-              "sort": "none"
-            }
-          },
-          "pluginVersion": "11.6.1",
-          "targets": [
-            {
-              "disableTextWrap": false,
-              "editorMode": "builder",
-              "exemplar": false,
-              "expr": "{\"abwcf.fetcher.received_bytes_bytes_total\", instance=~\"$instance\"}",
-              "fullMetaSearch": false,
-              "includeNullMetadata": true,
-              "instant": false,
-              "legendFormat": "{{actor_system.address}}{{actor.path}}",
-              "range": true,
-              "refId": "A",
-              "useBackend": false
-            }
-          ],
-          "title": "Received Response Body Bytes (Total)",
-          "type": "piechart"
         },
         {
           "datasource": {
@@ -1667,7 +1522,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 133
+            "y": 45
           },
           "id": 24,
           "options": {
@@ -1688,7 +1543,7 @@
             {
               "disableTextWrap": false,
               "editorMode": "builder",
-              "expr": "(sum by(\"http.response.status_code\") (increase({\"abwcf.fetcher.received_responses_total\", instance=~\"$instance\"}[$__rate_interval]))) > 0",
+              "expr": "sum by(\"http.response.status_code\") (increase({\"abwcf.fetcher.responses_total\", instance=~\"$instance\"}[$__rate_interval])) > 0",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "legendFormat": "__auto",
@@ -1763,7 +1618,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 133
+            "y": 45
           },
           "id": 25,
           "options": {
@@ -1784,7 +1639,7 @@
             {
               "disableTextWrap": false,
               "editorMode": "code",
-              "expr": "label_replace(sum by(\"http.response.header.content-type\") (increase({\"abwcf.fetcher.received_responses_total\", instance=~\"$instance\"}[$__rate_interval])) > 0, \"http.response.header.content-type\", \"$1\", \"http.response.header.content-type\", \"\\\\[\\\"(.+)\\\"\\\\]\")",
+              "expr": "label_replace(\r\n    sum by(\"http.response.header.content-type\") (increase({\"abwcf.fetcher.responses_total\", instance=~\"$instance\"}[$__rate_interval])) > 0,\r\n    \"http.response.header.content-type\", \"$1\", \"http.response.header.content-type\", \"\\\\[\\\"(.+)\\\"\\\\]\"\r\n    )",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "legendFormat": "__auto",
@@ -1821,7 +1676,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 141
+            "y": 53
           },
           "id": 26,
           "options": {
@@ -1854,7 +1709,7 @@
             {
               "disableTextWrap": false,
               "editorMode": "builder",
-              "expr": "sum by(\"http.response.status_code\") ({\"abwcf.fetcher.received_responses_total\", instance=~\"$instance\"})",
+              "expr": "sum by(\"http.response.status_code\") ({\"abwcf.fetcher.responses_total\", instance=~\"$instance\"})",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "legendFormat": "__auto",
@@ -1891,7 +1746,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 141
+            "y": 53
           },
           "id": 27,
           "options": {
@@ -1923,7 +1778,7 @@
             {
               "disableTextWrap": false,
               "editorMode": "code",
-              "expr": "label_replace(sum by(\"http.response.header.content-type\") ({\"abwcf.fetcher.received_responses_total\", instance=~\"$instance\"}), \"http.response.header.content-type\", \"$1\", \"http.response.header.content-type\", \"\\\\[\\\"(.+)\\\"\\\\]\")",
+              "expr": "label_replace(\r\n    sum by(\"http.response.header.content-type\") ({\"abwcf.fetcher.responses_total\", instance=~\"$instance\"}),\r\n    \"http.response.header.content-type\", \"$1\", \"http.response.header.content-type\", \"\\\\[\\\"(.+)\\\"\\\\]\"\r\n)",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "legendFormat": "__auto",
@@ -1998,7 +1853,7 @@
             "h": 8,
             "w": 18,
             "x": 0,
-            "y": 149
+            "y": 61
           },
           "id": 28,
           "options": {
@@ -2046,6 +1901,645 @@
         "w": 24,
         "x": 0,
         "y": 37
+      },
+      "id": 57,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.75,
+                "drawStyle": "bars",
+                "fillOpacity": 100,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 0,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "reqps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 70
+          },
+          "id": 58,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.6.1",
+          "targets": [
+            {
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "expr": "rate({\"abwcf.robots_fetcher.requests_total\", instance=~\"$instance\"}[$__rate_interval])",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "legendFormat": "{{actor_system.address}}",
+              "range": true,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Requested robots.txt Files (Per-Second Average Rate)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.75,
+                "drawStyle": "bars",
+                "fillOpacity": 100,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 0,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "Bps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 70
+          },
+          "id": 59,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.6.1",
+          "targets": [
+            {
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "expr": "rate({\"abwcf.robots_fetcher.received_bytes_bytes_total\", instance=~\"$instance\"}[$__rate_interval])",
+              "fullMetaSearch": true,
+              "includeNullMetadata": true,
+              "legendFormat": "{{actor_system.address}}",
+              "range": true,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Received Response Body Bytes (Per-Second Average Rate)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 78
+          },
+          "id": 60,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.6.1",
+          "targets": [
+            {
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "expr": "sum by(\"http.response.status_code\") (increase({\"abwcf.robots_fetcher.responses_total\", instance=~\"$instance\"}[$__rate_interval])) > 0",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Responses by Status Code",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 78
+          },
+          "id": 61,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.6.1",
+          "targets": [
+            {
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "expr": "label_replace(\r\n    sum by(\"http.response.header.content-type\") (increase({\"abwcf.robots_fetcher.responses_total\", instance=~\"$instance\"}[$__rate_interval])) > 0,\r\n    \"http.response.header.content-type\", \"$1\", \"http.response.header.content-type\", \"\\\\[\\\"(.+)\\\"\\\\]\"\r\n    )",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Responses by Content Type",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "mappings": []
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 86
+          },
+          "id": 62,
+          "options": {
+            "displayLabels": [],
+            "legend": {
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "values": [
+                "percent",
+                "value"
+              ]
+            },
+            "pieType": "donut",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.6.1",
+          "targets": [
+            {
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "expr": "sum by(\"http.response.status_code\") ({\"abwcf.robots_fetcher.responses_total\", instance=~\"$instance\"})",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Responses by Status Code (Total)",
+          "type": "piechart"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "mappings": []
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 86
+          },
+          "id": 63,
+          "options": {
+            "legend": {
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "values": [
+                "percent",
+                "value"
+              ]
+            },
+            "pieType": "donut",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.6.1",
+          "targets": [
+            {
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "expr": "label_replace(\r\n    sum by(\"http.response.header.content-type\") ({\"abwcf.robots_fetcher.responses_total\", instance=~\"$instance\"}),\r\n    \"http.response.header.content-type\", \"$1\", \"http.response.header.content-type\", \"\\\\[\\\"(.+)\\\"\\\\]\"\r\n)",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Responses by Content Type (Total)",
+          "type": "piechart"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.75,
+                "drawStyle": "bars",
+                "fillOpacity": 100,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 0,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 18,
+            "x": 0,
+            "y": 94
+          },
+          "id": 64,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.6.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "expr": "sum by(exception) (increase({\"abwcf.robots_fetcher.exceptions_total\", instance=~\"$instance\"}[$__rate_interval])) > 0",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "legendFormat": "{{exception}}",
+              "range": true,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Exceptions",
+          "type": "timeseries"
+        }
+      ],
+      "title": "Robots Fetcher",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 38
       },
       "id": 35,
       "panels": [
@@ -2112,7 +2606,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 294
+            "y": 494
           },
           "id": 36,
           "options": {
@@ -2212,7 +2706,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 294
+            "y": 494
           },
           "id": 37,
           "options": {
@@ -2259,7 +2753,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 39
       },
       "id": 6,
       "panels": [
@@ -2326,7 +2820,7 @@
             "h": 8,
             "w": 18,
             "x": 0,
-            "y": 39
+            "y": 239
           },
           "id": 7,
           "options": {
@@ -2392,7 +2886,7 @@
             "h": 16,
             "w": 6,
             "x": 18,
-            "y": 39
+            "y": 239
           },
           "id": 11,
           "options": {
@@ -2498,7 +2992,7 @@
             "h": 8,
             "w": 18,
             "x": 0,
-            "y": 47
+            "y": 247
           },
           "id": 8,
           "options": {
@@ -2545,7 +3039,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 40
       },
       "id": 38,
       "panels": [
@@ -2614,7 +3108,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 40
+            "y": 240
           },
           "id": 42,
           "options": {
@@ -2714,7 +3208,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 40
+            "y": 240
           },
           "id": 44,
           "options": {
@@ -2812,7 +3306,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 48
+            "y": 248
           },
           "id": 45,
           "options": {
@@ -2928,7 +3422,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 48
+            "y": 248
           },
           "id": 56,
           "options": {
@@ -2971,7 +3465,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 40
+        "y": 41
       },
       "id": 39,
       "panels": [
@@ -3040,7 +3534,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 41
+            "y": 241
           },
           "id": 46,
           "options": {
@@ -3140,7 +3634,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 41
+            "y": 241
           },
           "id": 47,
           "options": {
@@ -3238,7 +3732,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 49
+            "y": 249
           },
           "id": 49,
           "options": {
@@ -3370,7 +3864,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 49
+            "y": 249
           },
           "id": 55,
           "options": {
@@ -3413,7 +3907,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 41
+        "y": 42
       },
       "id": 50,
       "panels": [
@@ -3482,7 +3976,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 42
+            "y": 242
           },
           "id": 51,
           "options": {
@@ -3582,7 +4076,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 42
+            "y": 242
           },
           "id": 52,
           "options": {
@@ -3680,7 +4174,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 50
+            "y": 250
           },
           "id": 53,
           "options": {
@@ -3796,7 +4290,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 50
+            "y": 250
           },
           "id": 54,
           "options": {
