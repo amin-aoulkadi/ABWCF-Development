@@ -1,6 +1,6 @@
 import abwcf.actors.Crawler
-import abwcf.api.{CrawlerSettings, PrioritizationFunctions, UserCode}
-import abwcf.data.{FetchResponse, Page, PageCandidate}
+import abwcf.api.{CrawlerSettings, UserCode}
+import abwcf.data.{FetchResponse, Page}
 import com.typesafe.config.ConfigFactory
 import io.opentelemetry.api.GlobalOpenTelemetry
 import org.apache.pekko.actor.typed.ActorSystem
@@ -11,9 +11,6 @@ import scala.jdk.CollectionConverters.*
 
 @main def startCrawler(): Unit = {
   val userCode = new UserCode {
-    override def prioritize(candidate: PageCandidate, context: ActorContext[_]): Long =
-      PrioritizationFunctions.random
-
     override def onFetchSuccess(page: Page, response: FetchResponse, context: ActorContext[_]): Unit =
       context.log.info("Processing page {} ({}, {} bytes)", page.url, response.status, response.body.length)
 
