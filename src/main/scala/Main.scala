@@ -1,27 +1,15 @@
-import abwcf.actors.Crawler
+import abwcf.actors.{Crawler, FetchResultConsumer}
 import abwcf.api.{CrawlerSettings, UserCode}
-import abwcf.data.{FetchResponse, Page}
 import com.typesafe.config.ConfigFactory
 import io.opentelemetry.api.GlobalOpenTelemetry
-import org.apache.pekko.actor.typed.ActorSystem
-import org.apache.pekko.actor.typed.scaladsl.ActorContext
-import org.apache.pekko.http.scaladsl.model.StatusCode
+import org.apache.pekko.actor.typed.{ActorSystem, Behavior}
 
 import scala.jdk.CollectionConverters.*
 
 @main def startCrawler(): Unit = {
   val userCode = new UserCode {
-    override def onFetchSuccess(page: Page, response: FetchResponse, context: ActorContext[_]): Unit =
-      context.log.info("Processing page {} ({}, {} bytes)", page.url, response.status, response.body.length)
-
-    override def onFetchRedirect(page: Page, statusCode: StatusCode, redirectTo: Option[String], context: ActorContext[_]): Unit =
-      context.log.info("Processing redirect from {} ({}, redirection to {})", page.url, statusCode, redirectTo)
-
-    override def onFetchError(page: Page, statusCode: StatusCode, context: ActorContext[_]): Unit =
-      context.log.info("Processing error from {} ({})", page.url, statusCode)
-
-    override def onLengthLimitExceeded(page: Page, response: FetchResponse, context: ActorContext[_]): Unit =
-      context.log.info("{} ({}) was not fetched because it exceeds the maximum accepted content length", page.url, response.status)
+    override def createFetchResultConsumer(settings: CrawlerSettings): Behavior[FetchResultConsumer.Command] =
+      LoggingFetchResultConsumer()
   }
 
   val openTelemetry = GlobalOpenTelemetry.get()
