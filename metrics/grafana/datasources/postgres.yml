@@ -1,0 +1,29 @@
+#
+# Grafana data source configuration.
+#
+# References:
+#   https://grafana.com/docs/grafana/latest/administration/provisioning/
+#   https://grafana.com/docs/grafana/latest/datasources/postgres/configure/
+#
+
+apiVersion: 1
+
+datasources:
+  - name: PostgreSQL
+    uid: postgres
+    type: postgres
+    url: postgres:5432
+    user: postgres
+    secureJsonData:
+      password: changeme
+    jsonData:
+      database: postgres
+      sslmode: disable
+      maxOpenConns: 3
+      maxIdleConnsAuto: true
+      connMaxLifetime: 14400
+      postgresVersion: 1700
+      timescaledb: false
+      timeInterval: 10s
+    editable: true
+    isDefault: false

@@ -10,6 +10,7 @@ apiVersion: 1
 
 datasources:
   - name: Prometheus
+    uid: prometheus
     type: prometheus
     access: proxy
     url: http://prometheus:9090
@@ -23,3 +24,4 @@ datasources:
       incrementalQueryOverlapWindow: 10m
       disableRecordingRules: false
     editable: true
+    isDefault: true
