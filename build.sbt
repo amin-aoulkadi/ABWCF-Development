@@ -15,7 +15,7 @@ lazy val dev = Project("abwcf-dev", file("."))
   )
   .dependsOn(abwcf)
 
-lazy val abwcf = (project in file("Actor-Based Web Crawling Framework"))
+lazy val abwcf = (project in file("ABWCF"))
   .settings(
     assembly / assemblyJarName := "abwcf.jar"
   )

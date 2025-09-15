@@ -1,3 +1,3 @@
-[submodule "Actor-Based Web Crawling Framework"]
-	path = Actor-Based Web Crawling Framework
+[submodule "ABWCF"]
+	path = ABWCF
 	url = ../ABWCF.git

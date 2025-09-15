@@ -7,13 +7,13 @@ WORKDIR /app
 # Copy and load the sbt projects so that Docker can cache their dependencies in a layer:
 ADD --chown=sbtuser build.sbt /app/
 ADD --chown=sbtuser project /app/project/
-ADD --chown=sbtuser ["Actor-Based Web Crawling Framework/build.sbt", "/app/Actor-Based Web Crawling Framework/"]
-ADD --chown=sbtuser ["Actor-Based Web Crawling Framework/project", "/app/Actor-Based Web Crawling Framework/project/"]
+ADD --chown=sbtuser ["ABWCF/build.sbt", "/app/ABWCF/"]
+ADD --chown=sbtuser ["ABWCF/project", "/app/ABWCF/project/"]
 RUN sbt reload
 
 # Copy the source files:
 ADD --chown=sbtuser src /app/src/
-ADD --chown=sbtuser ["Actor-Based Web Crawling Framework/src", "/app/Actor-Based Web Crawling Framework/src/"]
+ADD --chown=sbtuser ["ABWCF/src", "/app/ABWCF/src/"]
 
 # Build the JAR:
 RUN sbt assembly
