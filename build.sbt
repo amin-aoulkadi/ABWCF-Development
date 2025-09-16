@@ -1,4 +1,3 @@
-//TODO: Replace sbt with Maven if possible.
 ThisBuild / version := "1.0.0-SNAPSHOT"
 ThisBuild / scalaVersion := "3.3.4"
 ThisBuild / assemblyMergeStrategy := {
