@@ -21,10 +21,8 @@ lazy val abwcf = (project in file("ABWCF"))
 
 val postgresVersion = "42.7.7" //License: BSD-2-Clause
 val logbackVersion = "1.5.18" //License: EPL / LGPL (dual license)
-val openTelemetryApiVersion = "1.54.0" //License: Apache-2.0
 
 libraryDependencies ++= Seq(
   "org.postgresql" % "postgresql" % postgresVersion,
-  "ch.qos.logback" % "logback-classic" % logbackVersion % Runtime,
-  "io.opentelemetry" % "opentelemetry-api" % openTelemetryApiVersion
+  "ch.qos.logback" % "logback-classic" % logbackVersion % Runtime
 )
