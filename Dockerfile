@@ -19,7 +19,7 @@ ADD --chown=sbtuser ABWCF/src /app/ABWCF/src/
 RUN sbt assembly
 
 
-FROM eclipse-temurin:23-jre-alpine
+FROM eclipse-temurin:25-jre-alpine
 
 ARG OTEL_JAVA_AGENT_VERSION
 
