@@ -20,7 +20,7 @@ lazy val abwcf = (project in file("ABWCF"))
   )
 
 val postgresVersion = "42.7.8" //License: BSD-2-Clause
-val logbackVersion = "1.5.18" //License: EPL / LGPL (dual license)
+val logbackVersion = "1.5.19" //License: EPL / LGPL (dual license)
 
 libraryDependencies ++= Seq(
   "org.postgresql" % "postgresql" % postgresVersion,
