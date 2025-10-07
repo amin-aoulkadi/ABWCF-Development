@@ -1,0 +1,20 @@
+version: 2
+
+updates:
+  # Version updates for GitHub Actions:
+  - package-ecosystem: "github-actions"
+    directory: "/" # Refers to ".github/workflows".
+    schedule:
+      interval: "weekly"
+
+  # Version updates for Dockerfiles:
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # Version updates for Docker Compose:
+  - package-ecosystem: "docker-compose"
+    directory: "/"
+    schedule:
+      interval: "weekly"
