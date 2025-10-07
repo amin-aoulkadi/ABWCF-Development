@@ -1,5 +1,5 @@
-# JDK: Eclipse Temurin 23.0.2, sbt: 1.10.11, Scala: 3.3.6
-FROM sbtscala/scala-sbt:eclipse-temurin-alpine-23.0.2_7_1.10.11_3.3.6 AS build
+# JDK: Eclipse Temurin 25, sbt: 1.11.7, Scala: 3.3.6
+FROM sbtscala/scala-sbt:eclipse-temurin-alpine-25_36_1.11.7_3.3.6 AS build
 
 USER sbtuser
 WORKDIR /app
