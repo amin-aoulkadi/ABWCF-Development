@@ -19,7 +19,7 @@ lazy val abwcf = (project in file("ABWCF"))
     assembly / assemblyJarName := "abwcf.jar"
   )
 
-val postgresVersion = "42.7.7" //License: BSD-2-Clause
+val postgresVersion = "42.7.8" //License: BSD-2-Clause
 val logbackVersion = "1.5.18" //License: EPL / LGPL (dual license)
 
 libraryDependencies ++= Seq(
