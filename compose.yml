@@ -40,7 +40,7 @@ services:
       - "--web.enable-otlp-receiver"
 
   grafana:
-    image: grafana/grafana-oss:11.6.1
+    image: grafana/grafana:12.2.0
     restart: unless-stopped
     ports:
       - 3000:3000
@@ -48,6 +48,7 @@ services:
       - ./metrics/grafana:/etc/grafana/provisioning:ro
     environment:
       GF_AUTH_ANONYMOUS_ENABLED: true
-      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin # According to the logs, this is deprecated ("auth.anonymous.org_role is deprecated, only viewer role is supported").
       GF_SECURITY_ADMIN_USER: admin
       GF_SECURITY_ADMIN_PASSWORD: changeme
+#      GF_FEATURE_TOGGLES_ENABLE: dashboardNewLayouts,kubernetesDashboards,dashboardScene # Required to access the new experimental dynamic dashboards.

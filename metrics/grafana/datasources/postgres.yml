@@ -22,7 +22,7 @@ datasources:
       maxOpenConns: 3
       maxIdleConnsAuto: true
       connMaxLifetime: 14400
-      postgresVersion: 1700
+      postgresVersion: 1800
       timescaledb: false
       timeInterval: 10s
     editable: true
