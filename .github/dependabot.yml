@@ -12,6 +12,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "sbtscala/scala-sbt" # Dependabot can not handle the versioning scheme of the image. Error: "Malformed version number string 36_1.11.7_3.3.6"
 
   # Version updates for Docker Compose:
   - package-ecosystem: "docker-compose"
