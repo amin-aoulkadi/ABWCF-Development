@@ -27,7 +27,7 @@ services:
       POSTGRES_PASSWORD: changeme
 
   prometheus:
-    image: prom/prometheus:v3.6.0
+    image: prom/prometheus:v3.7.1
     restart: unless-stopped
     ports:
       - 9090:9090
@@ -38,6 +38,7 @@ services:
       - "--config.file=/etc/prometheus/prometheus.yml"
       - "--storage.tsdb.path=/prometheus"
       - "--web.enable-otlp-receiver"
+      - "--enable-feature=created-timestamp-zero-ingestion"
 
   grafana:
     image: grafana/grafana:12.2.0
