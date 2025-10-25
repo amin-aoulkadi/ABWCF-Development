@@ -1,5 +1,5 @@
 ThisBuild / version := "1.0.0-SNAPSHOT"
-ThisBuild / scalaVersion := "3.3.6"
+ThisBuild / scalaVersion := "3.3.7"
 ThisBuild / assemblyMergeStrategy := {
   case file if file.endsWith("module-info.class") => MergeStrategy.concat
   case other =>
