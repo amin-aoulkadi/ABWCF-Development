@@ -27,7 +27,7 @@ services:
       POSTGRES_PASSWORD: changeme
 
   prometheus:
-    image: prom/prometheus:v3.7.1
+    image: prom/prometheus:v3.7.3
     restart: unless-stopped
     ports:
       - 9090:9090
