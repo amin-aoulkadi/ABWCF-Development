@@ -41,7 +41,7 @@ services:
       - "--enable-feature=created-timestamp-zero-ingestion"
 
   grafana:
-    image: grafana/grafana:12.2.1
+    image: grafana/grafana:12.3.1
     restart: unless-stopped
     ports:
       - 3000:3000
