@@ -1,7 +1,6 @@
 import abwcf.actors.{Crawler, FetchResultConsumer}
 import abwcf.api.{CrawlerSettings, UserCode}
 import com.typesafe.config.ConfigFactory
-import io.opentelemetry.api.GlobalOpenTelemetry
 import org.apache.pekko.actor.typed.{ActorSystem, Behavior}
 
 import scala.jdk.CollectionConverters.*
@@ -12,8 +11,7 @@ import scala.jdk.CollectionConverters.*
       LoggingFetchResultConsumer()
   }
 
-  val openTelemetry = GlobalOpenTelemetry.get()
-  val settings = CrawlerSettings(userCode, openTelemetry)
+  val settings = CrawlerSettings(userCode)
   val actorSystem = ActorSystem(Crawler(settings), "crawler")
 
   val seedUrls = ConfigFactory.load("seed-urls")
