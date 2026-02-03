@@ -41,7 +41,7 @@ services:
       - "--enable-feature=created-timestamp-zero-ingestion"
 
   grafana:
-    image: grafana/grafana:12.2.1
+    image: grafana/grafana:12.3.2
     restart: unless-stopped
     ports:
       - 3000:3000
@@ -52,4 +52,4 @@ services:
       GF_AUTH_ANONYMOUS_ORG_ROLE: Admin # According to the logs, this is deprecated ("auth.anonymous.org_role is deprecated, only viewer role is supported").
       GF_SECURITY_ADMIN_USER: admin
       GF_SECURITY_ADMIN_PASSWORD: changeme
-#      GF_FEATURE_TOGGLES_ENABLE: dashboardNewLayouts,kubernetesDashboards,dashboardScene # Required to access the new experimental dynamic dashboards.
+#      GF_FEATURE_TOGGLES_ENABLE: dashboardNewLayouts # Required to access the new experimental dynamic dashboards.
