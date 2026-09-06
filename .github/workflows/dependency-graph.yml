@@ -11,8 +11,8 @@ on:
     branches:
       - main
     paths:
-      - '*.sbt'
-      - 'project/**'
+      - "*.sbt"
+      - "project/**"
 
 permissions:
   contents: write # Required to submit the dependency graph to GitHub.
@@ -22,6 +22,6 @@ jobs:
     name: Update Dependency Graph
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: sbt/setup-sbt@v1
       - uses: scalacenter/sbt-dependency-submission@v3

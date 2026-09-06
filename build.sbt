@@ -1,5 +1,5 @@
 ThisBuild / version := "1.0.0-SNAPSHOT"
-ThisBuild / scalaVersion := "3.3.6"
+ThisBuild / scalaVersion := "3.3.8"
 ThisBuild / assemblyMergeStrategy := {
   case file if file.endsWith("module-info.class") => MergeStrategy.concat
   case other =>
@@ -19,8 +19,8 @@ lazy val abwcf = (project in file("ABWCF"))
     assembly / assemblyJarName := "abwcf.jar"
   )
 
-val postgresVersion = "42.7.9" //License: BSD-2-Clause
-val logbackVersion = "1.5.27" //License: EPL-2.0 or LGPL-2.1-only (dual license)
+val postgresVersion = "42.7.13" //License: BSD-2-Clause
+val logbackVersion = "1.6.3" //License: EPL-2.0 or LGPL-2.1-only (dual license)
 
 libraryDependencies ++= Seq(
   "org.postgresql" % "postgresql" % postgresVersion,

@@ -4,7 +4,7 @@ services:
     build:
       context: .
       args:
-        OTEL_JAVA_AGENT_VERSION: v2.24.0 # OpenTelemetry Java agent releases target specific OpenTelemetry SDK versions.
+        OTEL_JAVA_AGENT_VERSION: v2.31.1 # OpenTelemetry Java agent releases target specific OpenTelemetry SDK versions.
     restart: unless-stopped
     depends_on:
       - postgres
@@ -14,7 +14,7 @@ services:
       DATABASE_HOST: postgres
 
   postgres:
-    image: postgres:18-alpine
+    image: docker.io/postgres:18-alpine
     restart: unless-stopped
     ports:
       - 5432:5432
@@ -27,7 +27,7 @@ services:
       POSTGRES_PASSWORD: changeme
 
   prometheus:
-    image: prom/prometheus:v3.9.1
+    image: docker.io/prom/prometheus:v3.14.0-distroless
     restart: unless-stopped
     ports:
       - 9090:9090
@@ -41,7 +41,7 @@ services:
       - "--enable-feature=created-timestamp-zero-ingestion"
 
   grafana:
-    image: grafana/grafana:12.3.2
+    image: docker.io/grafana/grafana:13.2.1-distroless-slim
     restart: unless-stopped
     ports:
       - 3000:3000

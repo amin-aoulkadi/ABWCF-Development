@@ -1,5 +1,5 @@
-# JDK: Eclipse Temurin 25, sbt: 1.11.7, Scala: 3.3.6
-FROM sbtscala/scala-sbt:eclipse-temurin-alpine-25_36_1.11.7_3.3.6 AS build
+# JDK: Eclipse Temurin 25, sbt: 1.13.0, Scala: 3.3.8
+FROM docker.io/sbtscala/scala-sbt:eclipse-temurin-alpine-25.0.4_7_1.13.0_3.3.8 AS build
 
 USER sbtuser
 WORKDIR /app
@@ -19,7 +19,7 @@ ADD --chown=sbtuser ABWCF/src /app/ABWCF/src/
 RUN sbt assembly
 
 
-FROM eclipse-temurin:25-jre-alpine
+FROM docker.io/eclipse-temurin:25-jre-alpine
 
 ARG OTEL_JAVA_AGENT_VERSION
 
@@ -27,7 +27,7 @@ ARG OTEL_JAVA_AGENT_VERSION
 ADD --chown=sbtuser https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/${OTEL_JAVA_AGENT_VERSION}/opentelemetry-javaagent.jar /opentelemetry/opentelemetry-javaagent.jar
 
 # Copy the build artifacts:
-COPY --from=build /app/target/scala-3.3.6/abwcf-dev.jar /app/abwcf-dev.jar
+COPY --from=build /app/target/scala-3.3.8/abwcf-dev.jar /app/abwcf-dev.jar
 
 # Run the app:
 WORKDIR /app
