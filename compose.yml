@@ -41,7 +41,7 @@ services:
       - "--enable-feature=created-timestamp-zero-ingestion"
 
   grafana:
-    image: docker.io/grafana/grafana:13.2.1-distroless-slim
+    image: docker.io/grafana/grafana:13.2.2-distroless-slim
     restart: unless-stopped
     ports:
       - 3000:3000
