@@ -27,7 +27,7 @@ services:
       POSTGRES_PASSWORD: changeme
 
   prometheus:
-    image: docker.io/prom/prometheus:v3.14.0-distroless
+    image: docker.io/prom/prometheus:v3.15.0-distroless
     restart: unless-stopped
     ports:
       - 9090:9090
